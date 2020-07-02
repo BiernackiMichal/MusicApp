@@ -1,0 +1,279 @@
+@media  (max-width:640px)
+{
+  .sort-date-time-header, .date-time-row, .sort-added-by-header, .added-by-row, .song-description{
+    display: none;
+  }
+
+}
+
+.table {
+margin-bottom: 60px;
+position: absolute;
+width: 100%;
+}
+table {
+  width: 100%;
+
+
+}
+
+tr.example-detail-row {
+  height: 0;
+  background-image:linear-gradient(rgb(54, 53, 52),black, rgb(54, 53, 52));
+
+}
+tr.current-song-detail {
+  height: 0;
+  background-image:linear-gradient(red, black,red);
+
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: rgb(54, 53, 52);
+  transition-duration:1.5s;
+
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: rgb(175, 164, 0);
+
+
+
+}
+
+.example-element-row td {
+  color:yellow;
+
+}
+
+
+
+.current-song td {
+  color:red;
+
+}
+
+.example-element-detail {
+  color: yellow;
+  overflow: hidden;
+  display: flex;
+
+}
+
+
+.example-element-symbol {
+  color: white;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+
+}
+
+.song-description {
+  padding: 22px;
+
+
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+
+}
+.search-from-field {
+  width: 40%;
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: white;
+  border-radius: 5px;
+
+  position: relative;
+  height: 10 px;
+}
+.songs-layout-form {
+  background-color: black;
+ background-image:linear-gradient(black,rgb(54, 53, 52),black );
+
+}
+.paginator {
+  color: yellow;
+  background-color: black;
+  width: 100%;
+}
+.sort {
+  color: yellow;
+  background-image:linear-gradient(black,gray,black );
+
+}
+.sort-date-time-header {
+  color: yellow;
+  background-image:linear-gradient(black,gray,black );
+
+}
+.date-time-row {
+  color: yellow;
+}
+
+.sort-added-by-header {
+  color: yellow;
+  background-image:linear-gradient(black,gray,black );
+}
+.added-by-row {
+  color: yellow;
+}
+
+
+.download-button {
+  background:rgb(54, 53, 52);
+  color: yellow;
+  height: 36px;
+  margin-right: 5px;
+  margin-top: 13px;
+  transition-duration:5s;
+
+}
+.download-button:hover {
+  background: yellow;
+  color: black;
+
+}
+
+.edit-button {
+  background-color: rgb(54, 53, 52);
+  color: yellow;
+  margin-bottom: 13px;
+  margin-right: 5px;
+  margin-top: 13px;
+  transition-duration:5s;
+}
+.edit-button:hover {
+  background: green;
+  color: rgb(54, 53, 52);
+}
+.delete-button {
+  background-color: rgb(54, 53, 52);
+  color: yellow;
+  margin-bottom: 13px;
+  margin-right: 0px;
+  margin-top: 13px;
+  transition-duration:5s;
+}
+.delete-button:hover {
+  background: red;
+  color: rgb(54, 53, 52);
+}
+.drop-time-button {
+  color: white;
+  margin-bottom: 13px;
+  margin-right: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+.drop-time-button:hover {
+  width: 25px;
+  height: 25px;
+}
+
+.spinner {
+  position: fixed;
+  left: calc(100% - 60%);
+  top: 50%;
+}
+
+
+.slider {
+  position: fixed;
+  width: calc(100% - 250px);
+  height: 50px;
+  left: 250px;
+  bottom: 30px;
+  background-color: black;
+}
+::ng-deep .mat-slider *{
+  background-image:linear-gradient(yellow );
+}
+
+
+.play-button {
+position: fixed;
+ bottom: 30px;
+ left: 50px;
+ background-color: black;
+ cursor: pointer;
+}
+.row-play-button {
+  height: 15px;
+
+  cursor: pointer;
+}
+
+.pause-button {
+  position: fixed;
+  bottom: 30px;
+  background-color: black;
+  left: 50px;
+  cursor: pointer;
+
+}
+
+
+
+.next-button {
+  position: fixed;
+  bottom: 30px;
+  background-color: black;
+  left: 100px;
+  cursor: pointer;
+}
+
+.previous-button {
+  position: fixed;
+  bottom: 30px;
+  background-color: black;
+  left: 0px;
+  cursor: pointer;
+}
+.song-title {
+  bottom: 3px;
+  color: yellow;
+  position: fixed;
+  background-color: black;
+  width: 100%;
+  height: 33px;
+  font-size: larger;
+
+}
+.song-title > p{
+  white-space: pre;
+  animation:Title 30s linear infinite;
+  position:absolute;
+  margin:0;
+}
+@keyframes Title
+{
+  0% { transform:translateX(0); padding-left:110%; }
+  100% { transform:translateX(-100%); padding-left:110%; }
+}
+
+.timer {
+  bottom: 32px;
+  width: 100px;
+  left: 150px;
+  position: fixed;
+  color: yellow;
+  height: 48px;
+  background-color: black;
+}
+@media (max-width: 480px)
+{
+.slider {
+  left: 150px;
+  width: calc(100% - 150px);
+}
+.timer {
+  display: none;
+}
+
+
+}

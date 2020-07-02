@@ -1,0 +1,28 @@
+<mat-toolbar >
+
+    <input class="search" ngDefaultControl matInput [(ngModel)]="searchKey"  autocomplete="off" (keyup)="applyFilter(data)">
+
+    <span class="friendly-beat"> {{title}}</span>
+
+  <mat-form-field class="loggedAs">
+    <mat-label class="user-name" > Witaj, {{loggedUserName}} </mat-label>
+    <mat-select>
+      <div *ngIf="loggedUserRole == 'Administrator'">
+      <mat-option class="mat-option" routerLink="/adminManagePanel">Panel Admina</mat-option>
+      </div>
+
+     <div *ngIf="authService.decodedToken.role == 'Moderator'">
+       <mat-option class="mat-option" routerLink="/addSongForm" >Dodaj utwór </mat-option>
+       <mat-option class="mat-option" routerLink="/addSetForm" >Dodaj set </mat-option>
+     </div>
+
+     <mat-option *ngIf="loggedUserRole == 'User' ||  loggedUserRole == 'Moderator'" routerLink="/setsLayout" >sety</mat-option>
+     <mat-option class="logout-button" (click)="logout()" routerLink='' >Wyloguj</mat-option>
+
+    </mat-select>
+  </mat-form-field>
+</mat-toolbar>
+
+<app-songs-layout   (dataFromSongsLayout) = "applyFilter($event)" [dataSource]="data" ></app-songs-layout>
+
+

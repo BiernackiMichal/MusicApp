@@ -1,0 +1,72 @@
+<div >
+  <mat-card class="addSong-Form">
+    <mat-card-header >
+    <mat-card-title class="mat-card-title" ><pre>Formularz dodawania seta       </pre></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form #addSetForm="ngForm" (ngSubmit)="addSet()">
+        <mat-form-field class="ng-untouched">
+          <input
+            autocomplete="off"
+            matInput
+            placeholder="Wykonawca"
+            type="text"
+            [(ngModel)]="set.artist"
+            name="artist"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            autocomplete="off"
+            matInput
+            placeholder="Tytuł"
+            type="text"
+            [(ngModel)]="set.title"
+            name="title"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            autocomplete="off"
+            matInput
+            placeholder="link do odtworzenia"
+            type="text"
+            [(ngModel)]="set.urlToPlay"
+            name="urlToPlay"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            autocomplete="off"
+            matInput
+            placeholder="link do pobrania"
+            type="text"
+            [(ngModel)]="set.urlToDownload"
+            name="urlToDownload"
+            required
+          />
+        </mat-form-field>
+
+
+          <button
+            class="addSong-button"
+            mat-raised-button
+            type="submit"
+            [disabled]="!addSetForm.valid"
+          >Dodaj set</button>
+
+
+
+        <button
+           class="cancel-button"
+            mat-raised-button
+            routerLink="/home"
+            >Anuluj</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,61 @@
+<div>
+<mat-card class="register-form">
+  <mat-card-header>
+    <mat-card-title>Rejestracja</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form #registerForm="ngForm" (ngSubmit)="register()">
+      <mat-form-field >
+        <input
+          #name="ngModel"
+          matInput
+          autocomplete="off"
+          type="text"
+          [(ngModel)]="model.username"
+          name="username"
+          required
+          pattern="^[A-Za-z0-9a-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{4,20}$"
+          placeholder="nazwa użytkownika"
+          />
+     </mat-form-field>
+     <div *ngIf="name.errors && (name.invalid || name.touched)">
+        <small *ngIf="name.errors.required && name.touched ">Nazwa użytkownika jest wymagana.</small>
+        <small *ngIf="name.errors.pattern ">Nazwa użytkownika musi się składać od 4 do 20 znaków.</small>
+    </div>
+
+      <mat-form-field>
+        <input
+          #password="ngModel"
+          matInput
+          type="password"
+          [(ngModel)]="model.password"
+          name="password"
+          required
+          pattern="^[A-Za-z0-9a-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{6,12}$"
+          placeholder="hasło"
+        />
+      </mat-form-field>
+      <div *ngIf="password.errors && (password.invalid || password.touched)">
+        <small *ngIf="password.errors.required && password.touched ">Hasło jest wymagane</small>
+        <small *ngIf="password.errors.pattern ">Hasło musi się składać od 6 do 12 znaków.</small>
+    </div>
+
+
+
+
+        <button mat-raised-button type="submit" (click)="showSpinner()" [disabled]="!registerForm.valid "
+        >Zarejestruj się</button>
+        <button  mat-raised-button   routerLink=''>Anuluj rejestrację</button>
+
+
+    </form>
+
+
+  </mat-card-content>
+</mat-card>
+</div>
+
+
+<div *ngIf="IsSpinnerVisible == true">
+  <mat-spinner class="spinner"></mat-spinner>
+</div>

@@ -1,0 +1,106 @@
+<mat-toolbar >
+  <div class="webdesigntuts-workshop">
+    <input matInput [(ngModel)]="searchKey"  autocomplete="off" (keyup)="applyFilter(data)">
+  </div>
+  <span class="friendly-beat"> Friendly Beat</span>
+   <mat-form-field class="loggedAs">
+   <mat-label class="user-name" > Witaj, {{authService.decodedToken.unique_name}} </mat-label>
+
+
+    <mat-select>
+      <div *ngIf="authService.decodedToken.role == 'Administrator'">
+      <mat-option class="mat-option" routerLink="/adminManagePanel">Panel Admina</mat-option>
+      </div>
+      <mat-option class="mat-option"  routerLink='/home' >Strona Główna</mat-option>
+     <div *ngIf="authService.decodedToken.role == 'Moderator' || authService.decodedToken.role == 'Administrator' ">
+       <mat-option class="mat-option" routerLink="/addSongForm" >Dodaj utwór </mat-option>
+       <mat-option class="mat-option" routerLink="/addSetForm" >Dodaj set </mat-option>
+     </div>
+     <mat-option class="mat-option" (click)="logout()" routerLink='' >Wyloguj</mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-toolbar>
+
+
+<div class="table">
+  <table mat-table multiTemplateDataRows   [dataSource]="dataSource" matSort class="songs-layout-form" >
+
+ <ng-container matColumnDef="artist">
+ <th  mat-header-cell class="sort" mat-sort-header *matHeaderCellDef > Artist</th>
+ <td mat-cell *matCellDef="let set">
+ <div>
+  <img class="row-play-button"  src="../../assets/small play.png" (click)="start(set)"  >
+  {{set.artist}}
+  </div>
+  </td>
+ </ng-container>
+
+ <ng-container matColumnDef="title">
+  <th mat-header-cell class="sort" mat-sort-header *matHeaderCellDef > Title</th>
+  <td mat-cell *matCellDef="let set">{{set.title}}</td>
+  </ng-container>
+
+
+    <ng-container matColumnDef="whoAdded">
+      <th class="sort-added-by-header" mat-header-cell  mat-sort-header *matHeaderCellDef > Added By</th>
+      <td class="added-by-row"  mat-cell *matCellDef="let set">{{set.whoAdded}}</td>
+      </ng-container>
+
+
+      <ng-container  matColumnDef="addedDateTime">
+        <th class="sort-date-time-header"  mat-header-cell  mat-sort-header *matHeaderCellDef > Date/Time</th>
+        <td class="date-time-row"  mat-cell *matCellDef="let set">{{set.addedDateTime}}</td>
+        </ng-container>
+
+
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let set" [attr.colspan]="displayedColumns.length" >
+          <div class="example-element-detail"
+               [@detailExpand]="set == expandedElement ? 'expanded' : 'collapsed'">
+
+
+               <button (click)="downloadSong(set)" mat-raised-button class="download-button">Pobierz</button>
+               <div *ngIf="authService.decodedToken.role == 'Administrator' ||  authService.decodedToken.role == 'Moderator'" >
+               <button (click)="editSet(set)" mat-raised-button class="edit-button">Edytuj</button>
+               <button (click)="deleteSetConfirmation(set)" mat-raised-button class="delete-button">Usuń</button>
+               </div>
+
+
+            <div class="song-description">
+                {{set.title}} - ({{set.whoAdded}})
+              <span class="example-element-description-attribution"></span>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row  ; columns: displayedColumns; "
+        [ngClass]="(row.id==this.set.id)?'current-set':'example-element-row'"
+        [class.example-expanded-row]="expandedElement === row"
+        (click)="expandedElement = expandedElement === row ? null : row">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" [ngClass]="(row.id==this.set.id)?'current-set-detail':'example-detail-row'"></tr>
+  </table>
+  <mat-paginator class="paginator" [pageSize]="pageSizeOptions" [hidePageSize]="true" > </mat-paginator >
+</div>
+<div class="player">
+  <img class="previous-button"  src="../../assets/previous.png" (click)="previous()"   >
+  <img class="pause-button" src="../../assets/pause.png"  (click)="togglePlayer(true)" *ngIf="isPlaying" >
+  <img  class="play-button" src="../../assets/play.png" (click)="togglePlayer(false)" *ngIf="!isPlaying" >
+  <img class="next-button"  src="../../assets/next.png" (click)="next()"  >
+  <mat-slider  class="slider"  (change)="seek($event)" [(ngModel)]="progress" max="100"></mat-slider>
+</div>
+<div class="song-title" >
+  <p> <b style="margin-right: 10px;" > {{set.artist }}</b> {{set.title}}</p>
+</div>
+<div class="timer">
+  <p  *ngIf="this.player"> {{this.currentTime |changeRowColor }} - {{this.player.duration(this.set.id) | changeRowColor}}</p>
+</div>
+
+
+<div *ngIf="IsSpinnerVisible == true">
+  <mat-spinner class="spinner"></mat-spinner>
+</div>
+

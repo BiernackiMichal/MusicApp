@@ -1,0 +1,45 @@
+<div>
+<mat-card class="login-form">
+  <mat-card-header>
+    <mat-card-title>Logowanie</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="mat-card-content">
+    <form #loginForm="ngForm"  (ngSubmit)="login()">
+      <mat-form-field class="login-input">
+        <input
+
+          autocomplete="off"
+          matInput
+          placeholder="Nazwa użytkownika"
+          type="text"
+          [(ngModel)]="model.username"
+          name="username"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field  class="login-input">
+        <input
+
+          autocomplete="off"
+          matInput
+          placeholder="Hasło"
+          type="password"
+          [(ngModel)]="model.password"
+          name="password"
+          required
+        />
+      </mat-form-field>
+
+    <button mat-raised-button class="login-button" (click)="showSpinner()" type="submit"
+    [disabled]="!loginForm.valid">Zaloguj</button>
+
+      <button class="register-button" mat-raised-button  routerLink="/register">Rejestracja</button>
+
+    </form>
+  </mat-card-content>
+</mat-card>
+</div>
+
+<div *ngIf="IsSpinnerVisible == true">
+  <mat-spinner class="spinner"></mat-spinner>
+</div>

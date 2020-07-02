@@ -1,0 +1,57 @@
+@media  (max-width:1600px) {
+  div >* {
+    flex-wrap: wrap;
+    display: flex;
+    width: auto;
+    left: 10px;
+    top: 10px;
+    right: 10px;
+
+
+  }
+}
+
+mat-card {
+  width: 700px;
+  position: absolute;
+  top: 30%;
+  left: 35% ;
+
+  }
+
+  mat-card-content *{
+
+    width: 100%;
+  }
+.succesMessage {
+background-color: black;
+color: white;
+  }
+.editSong-Form {
+  color: yellow;
+  background-image:linear-gradient(rgb(54, 53, 52),green, rgb(54, 53, 52));
+
+}
+.addSong-button {
+  color: yellow;
+  background-color: black;
+  margin-bottom: 10px;
+}
+.cancel-button {
+  color: yellow;
+  background-color: black;
+}
+.mat-option  {
+  color: yellow;
+  background: black;
+}
+.mat-option:hover {
+ background-color: rgb(54, 53, 52);
+}
+.mat-form-field {
+  border-bottom-width: 1;
+}
+::ng-deep .mat-select-value {
+  color: yellow;
+}
+

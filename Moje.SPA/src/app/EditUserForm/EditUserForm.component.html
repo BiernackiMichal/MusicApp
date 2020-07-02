@@ -1,0 +1,47 @@
+<div >
+  <mat-card class="editSong-Form">
+    <mat-card-header>
+      <mat-card-title>Edytuj utwór</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form #editUserForm="ngForm" (ngSubmit)="editUser()">
+        <mat-form-field class="ng-untouched">
+          <input
+            autocomplete="off"
+            matInput
+            placeholder="Username"
+            type="text"
+            [(ngModel)]="user.username"
+            name="username"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+
+          <mat-label >Rola</mat-label>
+          <mat-select [(ngModel)]="user.userRole" name="userRole" required>
+            <mat-option  class="mat-option" *ngFor="let role of roles" [value]="role">
+              {{role}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+          <button
+            class="addSong-button"
+            mat-raised-button
+            type="submit"
+            [disabled]="!editUserForm.valid"
+          >
+            Edytuj użytkownika
+          </button>
+        <button
+           class="cancel-button"
+            mat-raised-button
+            routerLink="/adminManagePanel"
+            >
+            Anuluj
+          </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

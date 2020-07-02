@@ -1,0 +1,53 @@
+ <mat-toolbar >
+  <mat-form-field class="webdesigntuts-workshop">
+    <input matInput  (keyup)="applyFilter($event.target.value)" >
+  </mat-form-field>
+
+
+    <span class="friendly-beat"> Friendly Beat</span>
+
+
+  <mat-form-field class="loggedAs">
+  <mat-label >Admin, {{authService.decodedToken.unique_name}}</mat-label>
+
+  <mat-select *ngIf="authService.decodedToken.role == 'Administrator'">
+     <mat-option class="mat-option"  routerLink="/home">Strona główna</mat-option>
+     <mat-option  class="mat-option" routerLink="/addSongForm">Dodaj utwór</mat-option>
+     <mat-option  class="mat-option" routerLink="/addSongForm">Dodaj set</mat-option>
+     <mat-option *ngIf="authService.decodedToken.role == 'Administrator'" routerLink="/setsLayout" >sety</mat-option>
+     <mat-option class="mat-option"  (click)="logout()" routerLink=''>Wyloguj</mat-option>
+  </mat-select>
+  </mat-form-field>
+ </mat-toolbar>
+
+
+
+ <table mat-table [dataSource]="dataSource" class="users-layout-form">
+
+  <!-- Id Column -->
+  <ng-container  matColumnDef="Id">
+    <th class="user-header" mat-header-cell *matHeaderCellDef> Id </th>
+    <td class="user-row" mat-cell *matCellDef="let user"> {{user.id}}</td>
+  </ng-container>
+
+  <!-- Username Column -->
+  <ng-container class="user-row" matColumnDef="username">
+    <th class="user-header" mat-header-cell *matHeaderCellDef> Nazwa użytkownika </th>
+    <td class="user-row" mat-cell *matCellDef="let user"> {{user.username}}
+      <button class="delete-button" mat-raised-button (click)="deleteUserConfirmation(user)">Usuń użytkownika </button>
+
+     </td>
+  </ng-container>
+
+  <!-- UserRole Column -->
+  <ng-container matColumnDef="userRole">
+    <th class="user-header" mat-header-cell *matHeaderCellDef> Rola </th>
+    <td class="user-row" mat-cell *matCellDef="let user"> {{user.userRole}}
+      <button class="edit-button" mat-raised-button (click)="editUser(user)">Edytuj</button>
+    </td>
+  </ng-container>
+
+
+  <tr   mat-header-row *matHeaderRowDef="displayedColumns" class="user-row"></tr>
+  <tr  mat-row *matRowDef="let row; columns: displayedColumns" class="user-row"></tr>
+ </table>

@@ -1,0 +1,88 @@
+
+<div class="table">
+  <table mat-table multiTemplateDataRows   [dataSource]="dataSource" matSort class="songs-layout-form" >
+
+ <ng-container matColumnDef="artist">
+ <th  mat-header-cell class="sort" mat-sort-header *matHeaderCellDef > Wykonawca</th>
+ <td mat-cell *matCellDef="let song" >
+ <div>
+  <img class="row-play-button"  src="../../assets/small play.png" (click)="start(song)"  >
+  {{song.artist}}
+  </div>
+ </td>
+ </ng-container>
+
+ <ng-container matColumnDef="title">
+  <th mat-header-cell class="sort" mat-sort-header *matHeaderCellDef > Tytuł</th>
+  <td mat-cell  *matCellDef="let song">{{song.title}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="genre">
+    <th mat-header-cell class="sort-added-by-header" mat-sort-header *matHeaderCellDef > Gatunek</th>
+    <td  class="added-by-row"   mat-cell *matCellDef="let song">{{song.genre}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="whoAdded">
+      <th class="sort-added-by-header" mat-header-cell  mat-sort-header *matHeaderCellDef > Przez</th>
+      <td class="added-by-row"  mat-cell *matCellDef="let song">{{song.whoAdded}}</td>
+      </ng-container>
+
+
+      <ng-container  matColumnDef="addedDateTime">
+        <th class="sort-date-time-header"  mat-header-cell  mat-sort-header *matHeaderCellDef > Data/Godz</th>
+        <td class="date-time-row"  mat-cell *matCellDef="let song">{{song.addedDateTime}}</td>
+        </ng-container>
+
+
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let song" [attr.colspan]="displayedColumns.length">
+          <div class="example-element-detail"
+               [@detailExpand]="song == expandedElement ? 'expanded' : 'collapsed'">
+
+
+               <button (click)="downloadSong(song)" mat-raised-button class="download-button">Pobierz</button>
+               <div *ngIf="authService.decodedToken.role == 'Administrator' ||  authService.decodedToken.role == 'Moderator'" >
+               <button (click)="editSong(song)" mat-raised-button class="edit-button">Edytuj</button>
+               <button (click)="deleteSongConfirmation(song)" mat-raised-button class="delete-button">Usuń</button>
+               </div>
+
+
+            <div class="song-description">
+                {{song.title}} - ({{song.whoAdded}})
+              <span class="example-element-description-attribution"></span>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row  *matRowDef="let row   ; columns: displayedColumns; "
+        [ngClass]="(row.id==this.song.id)?'current-song':'example-element-row'"
+        [class.example-expanded-row]="expandedElement === row "
+        (click)=" expandedElement = expandedElement === row ? null : row">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" [ngClass]="(row.id==this.song.id)?'current-song-detail':'example-detail-row'"></tr>
+  </table>
+  <mat-paginator class="paginator" [pageSize]="pageSizeOptions" [hidePageSize]="true" > </mat-paginator >
+</div>
+
+<div >
+  <img class="previous-button"  src="../../assets/previous.png" (click)="canClickButton && previous()"   >
+  <img class="pause-button" src="../../assets/pause.png"  (click)="togglePlayer(true)" *ngIf="isPlaying" >
+  <img class="play-button" src="../../assets/play.png" (click)="togglePlayer(false)" *ngIf="!isPlaying" >
+  <img  class="next-button"  src="../../assets/next.png"  (click)="canClickButton && next()" >
+  <mat-slider  class="slider" (change)="seek($event)" [(ngModel)]="progress" max="100"></mat-slider>
+</div>
+
+<div class="song-title" >
+  <p> <b style="margin-right: 10px;" > {{song.artist}}</b> {{song.title}}</p>
+</div>
+
+<div class="timer">
+  <p  *ngIf="this.player"> {{this.currentTime |changeRowColor }} - {{this.player.duration(this.song.id) | changeRowColor}}</p>
+</div>
+
+<div *ngIf="IsSpinnerVisible == true">
+  <mat-spinner class="spinner"></mat-spinner>
+</div>
+

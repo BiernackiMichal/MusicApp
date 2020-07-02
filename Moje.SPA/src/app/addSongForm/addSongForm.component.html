@@ -1,0 +1,86 @@
+<div >
+  <mat-card class="addSong-Form">
+    <mat-card-header >
+      <mat-card-title >Formularz dodawania utworu</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form #addSongForm="ngForm" (ngSubmit)="addSong()">
+        <mat-form-field class="ng-untouched">
+          <input
+            autocomplete="off"
+            matInput
+            placeholder="Wykonawca"
+            type="text"
+            [(ngModel)]="model.artist"
+            name="artist"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            autocomplete="off"
+            matInput
+            placeholder="Tytuł"
+            type="text"
+            [(ngModel)]="model.title"
+            name="title"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label  >Gatunek</mat-label>
+          <mat-select  [(ngModel)]="model.genre" name="genre" required>
+            <mat-option class="mat-option" *ngFor="let genre of genres" [value]="genre">
+              {{genre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field
+        >
+
+        <mat-form-field>
+          <input
+            autocomplete="off"
+            matInput
+            placeholder="link do odtworzenia"
+            type="text"
+            [(ngModel)]="model.urlToPlay"
+            name="urlToPlay"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            autocomplete="off"
+            matInput
+            placeholder="link do pobrania"
+            type="text"
+            [(ngModel)]="model.urlToDownload"
+            name="urlToDownload"
+            required
+          />
+        </mat-form-field>
+
+
+          <button
+            class="addSong-button"
+            mat-raised-button
+            type="submit"
+            [disabled]="!addSongForm.valid"
+          >
+            Dodaj utwór
+          </button>
+
+
+
+        <button
+           class="cancel-button"
+            mat-raised-button
+            routerLink="/home"
+            >
+            Anuluj
+          </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
