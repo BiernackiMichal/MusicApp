@@ -1,10 +1,6 @@
 # MusicApp
 
-Friendly Beat
-
-live: http://freindlybeatnew-001-site1.atempurl.com
-
-FIRST login might take few seconds.
+Friendly Beat - Music App
 
 My second project, which is a small music application written with howler.js library
 
@@ -42,3 +38,9 @@ example login if you don't want to register for some reason:
 as moderator:
 - username: newuser
 - password: newuser
+
+FIRST login might take few seconds.
+
+live: http://freindlybeatnew-001-site1.atempurl.com
+
+
