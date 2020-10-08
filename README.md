@@ -41,5 +41,5 @@ as moderator:
 
 FIRST login might take few seconds.
 
-live: http://friendlybeat2-001-site1.ftempurl.com
+live: http://friendlybeat11-001-site1.dtempurl.com
 
