@@ -35,9 +35,9 @@ Technologies used in this project:
 
 example login if you don't want to register for some reason:
 
-as moderator:
-- username: newuser
-- password: newuser
+as user:
+- username: uzytkownik
+- password: uzytkownik
 
 FIRST login might take few seconds.
 
